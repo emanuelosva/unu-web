@@ -14,7 +14,6 @@
 
     const { data, status } = await apiRequest("/users/login", "POST", body);
 
-    console.log(data.user);
     if (status === 200) {
       // Clean template
       message = "";
@@ -27,6 +26,7 @@
       user.set(data.user);
       localStorage.setItem("user", data.user);
     }
+
     status === 401 ? (message = "Credenciales invalidas") : "";
     status === 422 ? (message = "Completa todos los campos") : "";
     status === 500
