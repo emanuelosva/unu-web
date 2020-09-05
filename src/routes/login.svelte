@@ -1,13 +1,9 @@
 <script>
   import { goto } from "@sapper/app";
-  import { stores } from "@sapper/app";
-
-  import { apiRequest } from "../api";
+  import axios from "axios";
 
   import PrincipalButton from "../components/PrincipalButton.svelte";
   import Title from "../components/Title.svelte";
-
-  const { session } = stores();
 
   let email = "";
   let password = "";
@@ -16,20 +12,16 @@
   const login = async () => {
     const body = { email, password };
 
-    const { data, status } = await apiRequest("/users/login", "POST", body);
+    const { status } = await axios({
+      url: "/api/login",
+      method: "POST",
+      data: { ...body },
+    });
 
     if (status === 200) {
-      // Clean template
       message = "";
-
-      // Go to dashborad
-      await goto("/dashboard");
-
-      // Store user session
-      localStorage.setItem("token", data.accessToken);
-      session.set(data);
+      window.location.href = "/dashboard";
     }
-
     status === 401 ? (message = "Credenciales invalidas") : "";
     status === 422 ? (message = "Completa todos los campos") : "";
     status === 500

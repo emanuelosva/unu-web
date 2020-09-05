@@ -1,12 +1,9 @@
 <script>
   import { goto } from "@sapper/app";
-  import { stores } from "@sapper/app";
-  import { apiRequest } from "../api";
+  import axios from "axios";
 
   import PrincipalButton from "../components/PrincipalButton.svelte";
   import Title from "../components/Title.svelte";
-
-  const { session } = stores();
 
   let name = "";
   let email = "";
@@ -21,20 +18,16 @@
     }
 
     const body = { name, email, password };
-    const { data, status } = await apiRequest("/users/signup", "POST", body);
+    const { status } = await axios({
+      url: "/api/signup",
+      method: "POST",
+      data: { ...body },
+    });
 
     if (status === 201) {
-      // Clean template
       message = "";
-
-      // Go to dashborad
-      await goto("/dashboard");
-
-      // Store user session
-      localStorage.setItem("token", data.accessToken);
-      session.set(data.user);
+      window.location.href = "/dashboard";
     }
-
     status === 409 ? (message = "El email ya está registrado") : "";
     status === 422 ? (message = "Completa todos los campos") : "";
     status === 500
