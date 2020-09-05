@@ -2,13 +2,9 @@
  * @fileoverview Configuration file.
  */
 
-require('dotenv').config();
 
 module.exports = {
-  app: {
-    env: process.env.NODE_ENV,
-  },
   api: {
-    base: process.env.API_BASE,
+    base: 'http://127.0.0.1:8000/api/v1',
   },
 };
