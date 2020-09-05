@@ -1,12 +1,18 @@
 <script>
   import { goto } from "@sapper/app";
   import { stores } from "@sapper/app";
+  import axios from "axios";
+
   const { session } = stores();
 
   const logout = async () => {
+    await axios({
+      url: "/api/logout",
+      method: "POST",
+    });
     await goto("/login");
-    localStorage.clear();
     $session.user = undefined;
+    $session.token = undefined;
   };
 
   export let segment;
