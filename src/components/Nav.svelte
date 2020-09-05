@@ -69,6 +69,10 @@
     color: black;
   }
 
+  i {
+    font-size: 0.8em;
+    margin-left: 8px;
+  }
   .logout {
     margin: 10px 10px 0 0;
   }
@@ -82,29 +86,39 @@
           aria-current={segment === undefined ? 'page' : undefined}
           href=".">Unu</a>
       </li>
-      <li>
-        {#if $session.user}
+      {#if $session.user}
+        <li>
           <a
             rel="prefetch"
             aria-current={segment === 'dashboard' ? 'page' : undefined}
             href="/dashboard">
             Dashboard
           </a>
-        {:else}
+        </li>
+        <li>
+          <a
+            rel="prefetch"
+            aria-current={segment === 'new-event' ? 'page' : undefined}
+            href="/dashboard/new-event">
+            Evento <i class="fas fa-plus" />
+          </a>
+        </li>
+      {:else}
+        <li>
           <a
             rel="prefetch"
             aria-current={segment === 'login' ? 'page' : undefined}
             href="login">
             Login
           </a>
-        {/if}
-      </li>
-      <li>
-        <a
-          rel="prefetch"
-          aria-current={segment === 'events' ? 'page' : undefined}
-          href="events">Eventos</a>
-      </li>
+        </li>
+        <li>
+          <a
+            rel="prefetch"
+            aria-current={segment === 'events' ? 'page' : undefined}
+            href="events">Eventos</a>
+        </li>
+      {/if}
     </ul>
   </nav>
   {#if $session.user}
