@@ -20,15 +20,37 @@
 
 <script>
   import { user } from "../../store";
-  export let userData;
 
+  import Title from "../../components/Title.svelte";
+  import DashboardMetrics from "../../components/DashboardMetrics.svelte";
+
+  export let userData;
   user.update((actual) => ({ ...actual, ...userData }));
+
+  let events = userData.myEvents;
+  let organizations = userData.organizations;
+  let collaborations = userData.myCollaborations;
 </script>
 
 <style>
+  .Dashboard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 </style>
 
+<svelte:head>
+  <title>Unu - Dashboard</title>
+</svelte:head>
+
 <div class="Dashboard">
-  <h1>Dashboard</h1>
-  {$user.uuid}
+  <Title text="Dashboard." />
+  <span> <i class="far fa-user-circle" /> {$user.name}</span>
+  <br />
+  <DashboardMetrics
+    events={events.length}
+    organizations={organizations.length}
+    collaborations={collaborations.length} />
 </div>
