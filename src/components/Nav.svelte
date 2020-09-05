@@ -1,5 +1,7 @@
 <script>
   export let segment;
+
+  let token;
 </script>
 
 <style>
@@ -45,29 +47,41 @@
     text-decoration: none;
     padding: 1em 0.5em;
     display: block;
+    color: black;
   }
 </style>
 
-<nav>
-  <ul>
-    <li>
-      <a
-        aria-current={segment === undefined ? 'page' : undefined}
-        href=".">Unu</a>
-    </li>
-    <li>
-      <a
-        aria-current={segment === 'login' ? 'page' : undefined}
-        href="login">login</a>
-    </li>
-
-    <!-- for the blog link, we're using rel=prefetch so that Sapper prefetches
-		     the blog data when we hover over the link or tap it on a touchscreen -->
-    <li>
-      <a
-        rel="prefetch"
-        aria-current={segment === 'events' ? 'page' : undefined}
-        href="events">Eventos</a>
-    </li>
-  </ul>
-</nav>
+<div class="Nav">
+  <nav>
+    <ul>
+      <li>
+        <a
+          aria-current={segment === undefined ? 'page' : undefined}
+          href=".">Unu</a>
+      </li>
+      <li>
+        {#if token}
+          <a
+            rel="prefetch"
+            aria-current={segment === 'dashboard' ? 'page' : undefined}
+            href="/dashboard">
+            Dashboard
+          </a>
+        {:else}
+          <a
+            rel="prefetch"
+            aria-current={segment === 'login' ? 'page' : undefined}
+            href="login">
+            Login
+          </a>
+        {/if}
+      </li>
+      <li>
+        <a
+          rel="prefetch"
+          aria-current={segment === 'events' ? 'page' : undefined}
+          href="events">Eventos</a>
+      </li>
+    </ul>
+  </nav>
+</div>

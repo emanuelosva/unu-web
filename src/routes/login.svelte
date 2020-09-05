@@ -4,6 +4,7 @@
   import { user } from "../store";
 
   import PrincipalButton from "../components/PrincipalButton.svelte";
+  import Title from "../components/Title.svelte";
 
   let email = "";
   let password = "";
@@ -47,18 +48,18 @@
     text-align: center;
     color: #ff3e00;
   }
+  a {
+    color: #000000;
+  }
 </style>
 
 <div class="Login">
   <div class="container">
+    <Title text="Login." />
     <div class="row">
       <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
         <div class="card card-signin my-5">
           <div class="card-body">
-            <h5 class="card-title text-center text-uppercase mb-5">
-              <strong>Unu - Login</strong>
-            </h5>
-
             <form class="form-signin" on:submit|preventDefault={login}>
               <div class="form-signin__input">
                 <label for="email">Email</label>
@@ -86,6 +87,9 @@
               </div>
               <p class="form-signin__message">{message}</p>
               <PrincipalButton content="Iniciar session" />
+              <p class="text-center mt-4">
+                <a href="/signup" rel="prefetch">Registrame</a>
+              </p>
               <hr class="my-4" />
             </form>
           </div>
