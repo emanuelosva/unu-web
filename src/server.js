@@ -79,7 +79,7 @@ server.post('/api/signup', async (req, res) => {
 
 // Logout
 server.post('/api/logout', (req, res) => {
-  res.cookie('token', undefined)
+  res.cookie('token', undefined, { maxAge: 0 })
   res.end();
 });
 
