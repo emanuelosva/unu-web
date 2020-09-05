@@ -19,7 +19,11 @@ server.use(sirv('static', { dev }))
 
 
 // Sapper middleware
-server.use(sapper.middleware())
+server.use(sapper.middleware({
+  session: (req, res) => ({
+    user: req.user,
+  })
+}));
 
 
 // Lauch server
