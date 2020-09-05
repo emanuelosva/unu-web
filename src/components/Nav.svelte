@@ -1,10 +1,23 @@
 <script>
-  export let segment;
+  import { goto } from "@sapper/app";
+  import { stores } from "@sapper/app";
+  const { session } = stores();
 
-  let token;
+  const logout = async () => {
+    await goto("/login");
+    localStorage.clear();
+    $session.user = undefined;
+  };
+
+  export let segment;
 </script>
 
 <style>
+  .Nav {
+    display: flex;
+    justify-content: space-between;
+  }
+
   nav {
     border-bottom: 1px solid rgba(255, 62, 0, 0.1);
     font-weight: 300;
@@ -49,6 +62,10 @@
     display: block;
     color: black;
   }
+
+  .logout {
+    margin: 10px 10px 0 0;
+  }
 </style>
 
 <div class="Nav">
@@ -60,7 +77,7 @@
           href=".">Unu</a>
       </li>
       <li>
-        {#if token}
+        {#if $session.user}
           <a
             rel="prefetch"
             aria-current={segment === 'dashboard' ? 'page' : undefined}
@@ -84,4 +101,14 @@
       </li>
     </ul>
   </nav>
+  {#if $session.user}
+    <div class="logout">
+      <li>
+        <button
+          type="button"
+          class="btn btn-ligth"
+          on:click={logout}>Logout</button>
+      </li>
+    </div>
+  {/if}
 </div>
