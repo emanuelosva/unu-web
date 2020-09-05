@@ -2,4 +2,10 @@
  * @fileoverview Svelte Store
  */
 
-const { user } = require("./user");
+import { writable } from "svelte/store";
+
+/**
+ * User store.
+ */
+
+export const user = writable({});
