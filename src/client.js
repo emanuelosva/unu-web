@@ -1,5 +1,5 @@
 /**
- * @fileoverview Cliend hydrate by sapper
+ * @fileoverview Client hydrate by sapper
  */
 
 import * as sapper from '@sapper/app';
