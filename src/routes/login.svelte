@@ -1,10 +1,13 @@
 <script>
   import { goto } from "@sapper/app";
+  import { stores } from "@sapper/app";
+
   import { apiRequest } from "../api";
-  import { user } from "../store";
 
   import PrincipalButton from "../components/PrincipalButton.svelte";
   import Title from "../components/Title.svelte";
+
+  const { session } = stores();
 
   let email = "";
   let password = "";
@@ -24,8 +27,7 @@
 
       // Store user session
       localStorage.setItem("token", data.accessToken);
-      user.set(data.user);
-      localStorage.setItem("user", data.user);
+      session.set(data);
     }
 
     status === 401 ? (message = "Credenciales invalidas") : "";
