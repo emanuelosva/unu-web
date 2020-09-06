@@ -23,6 +23,7 @@
 
   import Title from "../../components/Title.svelte";
   import DashboardMetrics from "../../components/DashboardMetrics.svelte";
+  import DashboardPrincipal from "../../components/DashboardPrincipal.svelte";
 
   export let userData;
   user.update((actual) => ({ ...actual, ...userData }));
@@ -49,8 +50,23 @@
   <Title text="Dashboard." />
   <span> <i class="far fa-user-circle" /> {$user.name}</span>
   <br />
+
   <DashboardMetrics
     events={events.length}
     organizations={organizations.length}
     collaborations={collaborations.length} />
+  <br />
+
+  <div class="container-flow">
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <DashboardPrincipal data={organizations} title="organizaciones" />
+      </div>
+      <div class="col-12 col-md-6">
+        <DashboardPrincipal data={events} title="eventos" />
+      </div>
+    </div>
+  </div>
+
+  <br />
 </div>
