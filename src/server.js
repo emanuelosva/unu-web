@@ -17,7 +17,7 @@ const dev = NODE_ENV === 'development';
 // Server instance
 const server = express()
 
-// Cockie manage
+// Coockie manage
 server.use(cookieParser())
 
 // Body parsers
