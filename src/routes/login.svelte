@@ -12,21 +12,27 @@
   const login = async () => {
     const body = { email, password };
 
-    const { status } = await axios({
-      url: "/api/login",
-      method: "POST",
-      data: { ...body },
-    });
+    try {
+      const { status } = await axios({
+        url: "/api/login",
+        method: "POST",
+        data: { ...body },
+      });
 
-    if (status === 200) {
-      message = "";
-      window.location.href = "/dashboard";
+      if (status === 200) {
+        message = "";
+        window.location.href = "/dashboard";
+      }
+    } catch (error) {
+      error.response.status === 401 ? (message = "Credenciales invalidas") : "";
+      error.response.status === 422
+        ? (message = "Completa todos los campos")
+        : "";
+      error.response.status === 500
+        ? (message =
+            "Lo sentimos, parece que hubo un error. Intentalo más tarde")
+        : "";
     }
-    status === 401 ? (message = "Credenciales invalidas") : "";
-    status === 422 ? (message = "Completa todos los campos") : "";
-    status === 500
-      ? (message = "Lo sentimos, parece que hubo un error. Intentalo más tarde")
-      : "";
   };
 </script>
 

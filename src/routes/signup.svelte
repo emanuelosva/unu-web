@@ -18,21 +18,30 @@
     }
 
     const body = { name, email, password };
-    const { status } = await axios({
-      url: "/api/signup",
-      method: "POST",
-      data: { ...body },
-    });
 
-    if (status === 201) {
-      message = "";
-      window.location.href = "/dashboard";
+    try {
+      const { status } = await axios({
+        url: "/api/signup",
+        method: "POST",
+        data: { ...body },
+      });
+
+      if (status === 201) {
+        message = "";
+        window.location.href = "/dashboard";
+      }
+    } catch (error) {
+      error.response.status === 409
+        ? (message = "El email ya está registrado")
+        : "";
+      error.response.status === 422
+        ? (message = "Completa todos los campos")
+        : "";
+      error.response.status === 500
+        ? (message =
+            "Lo sentimos, parece que hubo un error. Intentalo más tarde")
+        : "";
     }
-    status === 409 ? (message = "El email ya está registrado") : "";
-    status === 422 ? (message = "Completa todos los campos") : "";
-    status === 500
-      ? (message = "Lo sentimos, parece que hubo un error. Intentalo más tarde")
-      : "";
   };
 </script>
 
