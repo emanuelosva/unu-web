@@ -1,5 +1,4 @@
 <script>
-  import { goto } from "@sapper/app";
   import axios from "axios";
 
   import PrincipalButton from "../components/PrincipalButton.svelte";
