@@ -25,9 +25,10 @@
   }
 
   nav {
+    margin-right: 0;
+    padding: 0 0 0 1me;
     border-bottom: 1px solid rgba(255, 62, 0, 0.1);
     font-weight: 300;
-    padding: 0 1em;
   }
 
   ul {
@@ -71,7 +72,7 @@
 
   i {
     font-size: 0.8em;
-    margin-left: 8px;
+    margin-left: 5px;
   }
   .logout {
     margin: 10px 10px 0 0;

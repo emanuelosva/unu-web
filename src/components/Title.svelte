@@ -6,9 +6,15 @@
   h1 {
     margin: 0 auto;
     text-align: center;
-    font-size: 2.3em;
+    font-size: 1.9em;
     text-transform: uppercase;
     font-weight: 700;
+  }
+
+  @media (min-width: 360px) {
+    h1 {
+      font-size: 2.3em;
+    }
   }
 
   @media (min-width: 480px) {

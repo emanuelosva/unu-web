@@ -52,11 +52,11 @@
     {#each data as info}
       <p>
         {#if title === 'eventos'}
-          <a class="" href="/dashboard/{info.organizationUrl}/{info.uuid}">
+          <a class="" href="/dashboard/events/{info.uuid}">
             <strong>{info.name}</strong>
           </a>
         {:else if title === 'organizaciones'}
-          <a class="" href="/dashboard/{info.uuid}">
+          <a class="" href="/dashboard/organizations/{info.uuid}">
             <strong>{info.name}</strong>
           </a>
         {/if}
