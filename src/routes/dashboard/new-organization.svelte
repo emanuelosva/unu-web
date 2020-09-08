@@ -72,7 +72,7 @@
 </style>
 
 <svelte:head>
-  <title>Unu- Nueva organización</title>
+  <title>Unu - Nueva organización</title>
 </svelte:head>
 
 <div class="NewOrganization">
