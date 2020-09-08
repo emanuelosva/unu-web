@@ -19,13 +19,17 @@
 </script>
 
 <script>
-  import { user } from "../../store";
+  // Props
+  export let userData;
 
+  // Components
   import Title from "../../components/Title.svelte";
   import DashboardMetrics from "../../components/DashboardMetrics.svelte";
   import DashboardPrincipal from "../../components/DashboardPrincipal.svelte";
 
-  export let userData;
+  // Js files
+  import { user } from "../../store";
+
   user.update((actual) => ({ ...actual, ...userData }));
 
   let events = userData.myEvents;
