@@ -13,6 +13,14 @@
       headers: { Authorization: `Bearer ${token}` },
     });
 
+    if (res.status === 404) return this.error(404, "Not Found");
+    if (res.status === 403) {
+      return this.error(403, "No tienes acceso a este recurso");
+    }
+    if (res.status === 500) {
+      return this.error(500, "Problemas al cargar la página");
+    }
+
     const organization = await res.json();
     return { organization, token };
   }
@@ -28,17 +36,20 @@
   import PrincipalButton from "../../../components/PrincipalButton.svelte";
   import FormCard from "../../../components/FormCard.svelte";
 
+  import { goto } from "@sapper/app";
   import swal from "sweetalert";
   import { apiRequest, imageReader } from "../../../utils";
 
   // Reactive vars
   let logoName = "";
+
   let name = organization.name;
   let oficialUrl = organization.oficialUrl;
   let logo =
     organization.logo ||
     "https://via.placeholder.com/180x120.png?text=A%C3%BAn+no+tienes+logo";
 
+  // Read image
   const readLogo = () => {
     const image = document.getElementById("logo").files[0];
     logoName = image.name;
@@ -47,6 +58,7 @@
     reader.onload = () => (logo = reader.result);
   };
 
+  // Api request to edit organization
   const editOrganization = async () => {
     const body = { name, oficialUrl, logo };
 
@@ -69,6 +81,43 @@
         text: "Parce que hubo un error, porfavor inténtalo más tarde",
         icon: "error",
       });
+    }
+  };
+
+  // Delete organization
+  const deleteOrganization = async () => {
+    const deleted = await swal({
+      title: "Estás seguro",
+      icon: "warning",
+      text: "Esta acción es irreversible",
+      buttons: {
+        delete: {
+          text: "Eliminar",
+          value: true,
+        },
+        exit: {
+          text: "Cancelar",
+          value: false,
+        },
+      },
+    });
+
+    if (deleted) {
+      const { status } = await apiRequest({
+        path: `/organizations/${organization.uuid}`,
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      if (status === 200) {
+        await goto("/dashboard");
+      } else {
+        swal({
+          title: "Ups",
+          icon: "error",
+          text: "Al parecer ocurrió un error, intentalo más tarde",
+        });
+      }
     }
   };
 </script>
@@ -135,6 +184,11 @@
           <p class="text-center d-block">{logoName}</p>
           <PrincipalButton content="Guaradar Cambios" />
         </form>
+      </div>
+      <div class="card-footer text-right">
+        <div class="btn btn-outline-danger" on:click={deleteOrganization}>
+          Eliminar
+        </div>
       </div>
     </div>
   </FormCard>
