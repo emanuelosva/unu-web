@@ -19,12 +19,17 @@
 </script>
 
 <script>
+  // Props;
   export let event;
+  // export let token;
+
+  // Components
+  import Title from "../../../../components/Title.svelte";
 </script>
 
 <style>
 </style>
 
 <div class="EventIndex">
-  <h2>{event}</h2>
+  <Title text="{event.name}." />
 </div>

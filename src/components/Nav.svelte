@@ -116,8 +116,10 @@
         <li>
           <a
             rel="prefetch"
-            aria-current={segment === 'events' ? 'page' : undefined}
-            href="events">Eventos</a>
+            aria-current={segment === 'published-events' ? 'page' : undefined}
+            href="published-events">
+            Eventos
+          </a>
         </li>
       {/if}
     </ul>
