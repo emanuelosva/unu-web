@@ -67,11 +67,17 @@
   </div>
   <div class="text-right">
     {#if title === 'eventos'}
-      <a class="btn btn-outline-dark" href="/dashboard/new-event">
+      <a
+        class="btn btn-outline-dark"
+        href="/dashboard/new-event"
+        rel="prefetch">
         <i class="fas fa-plus" />
       </a>
     {:else if title === 'organizaciones'}
-      <a class="btn btn-outline-dark" href="/dashboard/new-organization">
+      <a
+        class="btn btn-outline-dark"
+        href="/dashboard/new-organization"
+        rel="prefetch">
         <i class="fas fa-plus" />
       </a>
     {/if}
