@@ -134,6 +134,10 @@
   }
 </style>
 
+<svelte:head>
+  <title>Unu - {name}</title>
+</svelte:head>
+
 <div class="EditOrganization">
   <Title text="{name}." />
   <FormCard>
